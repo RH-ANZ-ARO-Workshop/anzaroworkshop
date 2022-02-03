@@ -5,6 +5,60 @@ title: Basic concepts
 parent-id: intro
 ---
 
+### ARO CLI Demonstration & ARO example setup
+
+In this section, we’ll give you some links that can be used after the class for independent study.  We’ll demonstrate how to use some ARO commands, but due to the nature of our shared environment for this workshop, not every student will be able to log in with the full permissions required.  When you test this on your own with your own Azure credentials, all the commands will work in the same manner as they have been demonstrated today.
+
+To effectively administer a ARO instance, you’ll use a combination of “az aro,” “oc,” and “az” command line commands.  Below is a concise list of some of the more commonly used ARO command-line commands which we will be demonstrating today.  Later in the hands-on section of the workshop, you will be using some of the “oc” commands to deploy an application and query its status.  The complete ARO command list can be found at the following location: [https://docs.microsoft.com/en-us/cli/azure/aro?view=azure-cli-latest](https://docs.microsoft.com/en-us/cli/azure/aro?view=azure-cli-latest)
+
+#### ARO CLI Demonstration
+
+Here are some of the more commonly used AZ & AZ ARO commands.
+
+{% collapsible %}
+
+az login aroadmin@azure.opentlc.com / password
+
+az version (show Azure version)
+
+az version -o table (show Azure version in table format)
+
+az aro list [arguments] (list ARO clusters)
+
+az aro list -o table
+
+az vm list (list all VMs in the Azure account)
+
+az vm list -o table (list all VMs in a more human friendly format)
+
+az vm list --query "[].{resource:resourceGroup, name:name}" -o table
+
+az aro create [arguments] --help (create a cluster)
+
+az aro delete [arguments] --help (delete a cluster)
+
+az aro list-credentials [arguments] (list credentials of a cluster)
+
+az aro show [arguments] (get details of a cluster)
+
+az aro show -n <cluster_name>
+
+az aro update [arguments] (update a cluster)
+
+az aro wait [arguments] (wait for a cluster to reach a desired state)
+
+{% endcollapsible %}
+
+#### ARO example setup
+
+Further below, we’ve also provided three links to both the official ARO video and a short unofficial video, both on YouTube, created by an independent OpenShift user that demonstrates an abbreviated version of how to set up ARO yourself with your own Azure credentials for your independent study.
+
+* Official Red Hat web page - [https://cloud.redhat.com/products/azure-openshift](https://cloud.redhat.com/products/azure-openshift)
+* Official ARO Getting Started video - [https://www.youtube.com/watch?v=06yLlJSzZMY](https://www.youtube.com/watch?v=06yLlJSzZMY)
+* Unofficial video link posted for students to watch later - [https://www.youtube.com/watch?v=NVOmURaiDcc](https://www.youtube.com/watch?v=NVOmURaiDcc)
+* Official link to Microsoft ARO docs - [https://docs.microsoft.com/en-gb/azure/openshift/](https://docs.microsoft.com/en-gb/azure/openshift/)
+* Official link to Microsoft Azure tutorial docs - [https://docs.microsoft.com/en-gb/azure/openshift/tutorial-create-cluster](https://docs.microsoft.com/en-gb/azure/openshift/tutorial-create-cluster)
+
 ### Source-To-Image (S2I)
 
 Source-to-Image (S2I) is a toolkit and workflow for building reproducible container images from source code. S2I produces ready-to-run images by injecting source code into a container image and letting the container prepare that source code for execution. By creating self-assembling builder images, you can version and control your build environments exactly like you use container images to version your runtime environments.
