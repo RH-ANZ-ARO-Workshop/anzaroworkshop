@@ -124,31 +124,6 @@
     </li>
     
     <li  class="parent">
-        <a href="#aro-stuff">ARO Introduction</a>
-        
-            <ul>
-                
-                
-                    <li >
-                        <a href="#appoverview">Azure Command Line Intro</a>
-                        
-                    </li>
-                
-                    <li >
-                        <a href="#appoverview">ARO Command Line Intro</a>
-                        
-                    </li>
-                
-                    <li >
-                        <a href="#appoverview">Azure DevOps Intro</a>
-                        
-                    </li>
-                
-            </ul>
-        
-    </li>
-    
-    <li  class="parent">
         <a href="#lab-ratingapp">Lab 1 - Go Microservices</a>
         
             <ul>
@@ -281,7 +256,7 @@
                     
                 
 
-            <p><a href="https://azure.microsoft.com/en-us/services/openshift/">Azure Red Hat OpenShift</a> is a fully managed Red Hat OpenShift service in Azure that is jointly engineered and supported by Microsoft and Red Hat. In this lab, you’ll go through a set of tasks that will help you understand some of the concepts of deploying and securing container based applications on top of Azure Red Hat OpenShift.</p>
+            <p><a href="https://azure.microsoft.com/en-us/services/openshift/">Azure Red Hat OpenShift</a> (ARO) is a fully managed Red Hat OpenShift service in Azure that is jointly engineered and supported by Microsoft and Red Hat. In this lab, you’ll go through a set of tasks that will help you understand some of the concepts of deploying and securing container based applications on top of Azure Red Hat OpenShift.</p>
 
 <p>You can use this guide as an OpenShift tutorial and as study material to help you get started to learn OpenShift.</p>
 
@@ -318,13 +293,6 @@
 
 <p><img src="media/diagram.png" alt="Diagram" /></p>
 
-<h4 id="ssh-session">SSH Session</h4>
-<p>So our first step will be to SSH into the jump host. Details will be provided by the instructor providing the command to run and the required password.</p>
-
-<p>It will look similar to this: <strong>ssh student01@3.104.30…</strong></p>
-
-<p><img src="media/jumpssh.png" alt="Jump host SSH" /></p>
-
         </section>
     
 
@@ -334,7 +302,74 @@
                     <h2>Basic concepts</h2>
                 
 
-            <h3 id="source-to-image-s2i">Source-To-Image (S2I)</h3>
+            <h3 id="aro-cli-demonstration--aro-example-setup">ARO CLI Demonstration &amp; ARO example setup</h3>
+
+<p>In this section, we’ll give you some links that can be used after the class for independent study.  We’ll demonstrate how to use some ARO commands, but due to the nature of our shared environment for this workshop, not every student will be able to log in with the full permissions required.  When you test this on your own with your own Azure credentials, all the commands will work in the same manner as they have been demonstrated today.</p>
+
+<p>To effectively administer a ARO instance, you’ll use a combination of “az aro,” “oc,” and “az” command line commands.  Below is a concise list of some of the more commonly used ARO command-line commands which we will be demonstrating today.  Later in the hands-on section of the workshop, you will be using some of the “oc” commands to deploy an application and query its status.  The complete ARO command list can be found at the following location: <a href="https://docs.microsoft.com/en-us/cli/azure/aro?view=azure-cli-latest">https://docs.microsoft.com/en-us/cli/azure/aro?view=azure-cli-latest</a></p>
+
+<h4 id="aro-cli-demonstration">ARO CLI Demonstration</h4>
+
+<p>Here are some of the more commonly used AZ &amp; AZ ARO commands.</p>
+
+<!-- Begin collapsible container div -->
+<div class="collapsible-content-container">
+  <!-- Begin collapsible container button -->
+  <button class="toggle-collapsible">Toggle</button>
+  <!-- Begin collapsible container content div -->
+  <div class="collapsible-content">
+    <!-- Begin parsedText -->
+    
+<p>az login aroadmin@azure.opentlc.com / password</p>
+
+<p>az version (show Azure version)</p>
+
+<p>az version -o table (show Azure version in table format)</p>
+
+<p>az aro list [arguments] (list ARO clusters)</p>
+
+<p>az aro list -o table</p>
+
+<p>az vm list (list all VMs in the Azure account)</p>
+
+<p>az vm list -o table (list all VMs in a more human friendly format)</p>
+
+<p>az vm list –query “[].{resource:resourceGroup, name:name}” -o table</p>
+
+<p>az aro create [arguments] –help (create a cluster)</p>
+
+<p>az aro delete [arguments] –help (delete a cluster)</p>
+
+<p>az aro list-credentials [arguments] (list credentials of a cluster)</p>
+
+<p>az aro show [arguments] (get details of a cluster)</p>
+
+<p>az aro show -n <cluster_name></cluster_name></p>
+
+<p>az aro update [arguments] (update a cluster)</p>
+
+<p>az aro wait [arguments] (wait for a cluster to reach a desired state)</p>
+
+
+    <!-- End parsedText -->
+  </div>
+  <!-- End collapsible container content div -->
+</div>
+<!-- End collapsible container div -->
+
+<h4 id="aro-example-setup">ARO example setup</h4>
+
+<p>Further below, we’ve also provided three links to both the official ARO video and a short unofficial video, both on YouTube, created by an independent OpenShift user that demonstrates an abbreviated version of how to set up ARO yourself with your own Azure credentials for your independent study.</p>
+
+<ul>
+  <li>Official Red Hat web page - <a href="https://cloud.redhat.com/products/azure-openshift">https://cloud.redhat.com/products/azure-openshift</a></li>
+  <li>Official ARO Getting Started video - <a href="https://www.youtube.com/watch?v=06yLlJSzZMY">https://www.youtube.com/watch?v=06yLlJSzZMY</a></li>
+  <li>Unofficial video link posted for students to watch later - <a href="https://www.youtube.com/watch?v=NVOmURaiDcc">https://www.youtube.com/watch?v=NVOmURaiDcc</a></li>
+  <li>Official link to Microsoft ARO docs - <a href="https://docs.microsoft.com/en-gb/azure/openshift/">https://docs.microsoft.com/en-gb/azure/openshift/</a></li>
+  <li>Official link to Microsoft Azure tutorial docs - <a href="https://docs.microsoft.com/en-gb/azure/openshift/tutorial-create-cluster">https://docs.microsoft.com/en-gb/azure/openshift/tutorial-create-cluster</a></li>
+</ul>
+
+<h3 id="source-to-image-s2i">Source-To-Image (S2I)</h3>
 
 <p>Source-to-Image (S2I) is a toolkit and workflow for building reproducible container images from source code. S2I produces ready-to-run images by injecting source code into a container image and letting the container prepare that source code for execution. By creating self-assembling builder images, you can version and control your build environments exactly like you use container images to version your runtime environments.</p>
 
@@ -478,58 +513,6 @@ ImageStream and Builds: <a href="https://cloudowski.com/articles/why-managing-co
     
 
     
-        <section id="aro-stuff" class="h1">
-            
-                    
-                    <h1 class="nocount">ARO Introduction</h1>
-                    
-                
-
-            <p>Before we get started working on today’s labs, let’s have a quick look at what we’ll be deploying.</p>
-
-        </section>
-    
-
-    
-        <section id="appoverview" class="h2">
-            
-                    <h2>Azure Command Line Intro</h2>
-                
-
-            <p>You will be deploying a ratings application on Azure Red Hat OpenShift.</p>
-
-<p><img src="media/app-overview.png" alt="Application diagram" /></p>
-
-        </section>
-    
-
-    
-        <section id="appoverview" class="h2">
-            
-                    <h2>ARO Command Line Intro</h2>
-                
-
-            <p>You will be deploying a ratings application on Azure Red Hat OpenShift.</p>
-
-<p><img src="media/app-overview.png" alt="Application diagram" /></p>
-
-        </section>
-    
-
-    
-        <section id="appoverview" class="h2">
-            
-                    <h2>Azure DevOps Intro</h2>
-                
-
-            <p>You will be deploying a ratings application on Azure Red Hat OpenShift.</p>
-
-<p><img src="media/app-overview.png" alt="Application diagram" /></p>
-
-        </section>
-    
-
-    
         <section id="lab-ratingapp" class="h1">
             
                     
@@ -592,9 +575,12 @@ ImageStream and Builds: <a href="https://cloudowski.com/articles/why-managing-co
                     <h2>Cluster Access</h2>
                 
 
-            <h3 id="access-your-azure-red-hat-openshift-cluster">Access your Azure Red Hat OpenShift Cluster</h3>
+            <h4 id="ssh-session">SSH Session</h4>
+<p>So our first step will be to SSH into the jump host. Details will be provided by the instructor providing the command to run and the required password.</p>
 
-<p>We’ll start by getting into our cluster.</p>
+<p>It will look similar to this: <strong>ssh student01@3.104.30…</strong></p>
+
+<p><img src="media/jumpssh.png" alt="Jump host SSH" /></p>
 
 <h2 id="connect-to-the-cluster">Connect to the cluster</h2>
 
